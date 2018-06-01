@@ -375,7 +375,7 @@ namespace Org.BouncyCastle.Cms.Tests
 			+ "g5+CWIP1dz4F4yB0rNCEGEFigVESryFAzSdJuoM0dgBDI0czNQD9lBQ7l2UW"
 			+ "4fwPDeINgCE2190+uVyEom2E");
 
-		private void VerifySignatures(
+		public static void VerifySignatures(
 			CmsSignedData	s,
 			byte[]			contentDigest)
 		{
@@ -402,7 +402,7 @@ namespace Org.BouncyCastle.Cms.Tests
 			}
 		}
 
-		private void VerifySignatures(
+		public static void VerifySignatures(
 			CmsSignedData s)
 		{
 			VerifySignatures(s, null);
