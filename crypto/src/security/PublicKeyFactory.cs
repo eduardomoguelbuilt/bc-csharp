@@ -13,6 +13,7 @@ using Org.BouncyCastle.Asn1.X9;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Extension;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
 
@@ -220,6 +221,11 @@ namespace Org.BouncyCastle.Security
             }
             else
             {
+                var factory = ExtensionManager.FindPublicKeyFactory(keyInfo);
+                var key = factory?.CreateKey(keyInfo);
+                if (key != null)
+                    return key;
+
                 throw new SecurityUtilityException("algorithm identifier in key not recognised: " + algOid);
             }
         }

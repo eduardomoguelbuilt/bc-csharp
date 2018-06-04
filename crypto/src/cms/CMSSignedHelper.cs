@@ -19,6 +19,7 @@ using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.X509;
 using Org.BouncyCastle.X509.Store;
 using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Extension;
 using Org.BouncyCastle.Utilities.Collections;
 
 namespace Org.BouncyCastle.Cms
@@ -141,7 +142,11 @@ namespace Org.BouncyCastle.Cms
 				return algName;
 			}
 
-			return digestAlgOid;
+            var factory = ExtensionManager.FindDigestFactory(new DerObjectIdentifier(digestAlgOid));
+            if (factory != null)
+                return factory.AlgorithmName;
+
+            return digestAlgOid;
         }
 
     internal AlgorithmIdentifier GetEncAlgorithmIdentifier(
@@ -179,7 +184,11 @@ namespace Org.BouncyCastle.Cms
 				return algName;
 			}
 
-			return encryptionAlgOid;
+            algName = ExtensionManager.FindEncryptionAlgorithmName(new DerObjectIdentifier(encryptionAlgOid));
+            if (algName != null)
+                return algName;
+
+            return encryptionAlgOid;
         }
 
 		internal IDigest GetDigestInstance(
@@ -198,7 +207,13 @@ namespace Org.BouncyCastle.Cms
 					try { return DigestUtilities.GetDigest(alias); }
 					catch (SecurityUtilityException) {}
 				}
-				throw e;
+
+			    var factory = ExtensionManager.FindDigestFactory(algorithm);
+			    var digest = factory?.CreateDigest();
+			    if (digest != null)
+			        return digest;
+
+			    throw e;
 			}
 		}
 

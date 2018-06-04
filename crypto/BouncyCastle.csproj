@@ -1119,6 +1119,10 @@
     <Compile Include="src\crypto\tls\UseSrtpData.cs" />
     <Compile Include="src\crypto\tls\UserMappingType.cs" />
     <Compile Include="src\crypto\util\Pack.cs" />
+    <Compile Include="src\extension\ExtensionManager.cs" />
+    <Compile Include="src\extension\IDigestFactoryExtension.cs" />
+    <Compile Include="src\extension\IDigestSignerFactoryExtension.cs" />
+    <Compile Include="src\extension\IKeyFactoryExtension.cs" />
     <Compile Include="src\math\BigInteger.cs" />
     <Compile Include="src\math\Primes.cs" />
     <Compile Include="src\math\ec\ECAlgorithms.cs" />
@@ -1267,9 +1271,9 @@
     <Compile Include="src\math\ec\multiplier\ZSignedDigitL2RMultiplier.cs" />
     <Compile Include="src\math\ec\multiplier\ZSignedDigitR2LMultiplier.cs" />
     <Compile Include="src\math\ec\rfc7748\X25519.cs" />
-    <Compile Include="src\math\ec\rfc7748\X25519Field.cs"/>
-    <Compile Include="src\math\ec\rfc7748\X448.cs"/>
-    <Compile Include="src\math\ec\rfc7748\X448Field.cs"/>
+    <Compile Include="src\math\ec\rfc7748\X25519Field.cs" />
+    <Compile Include="src\math\ec\rfc7748\X448.cs" />
+    <Compile Include="src\math\ec\rfc7748\X448Field.cs" />
     <Compile Include="src\math\field\FiniteFields.cs" />
     <Compile Include="src\math\field\GF2Polynomial.cs" />
     <Compile Include="src\math\field\GenericPolynomialExtensionField.cs" />

@@ -15,6 +15,7 @@ using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Signers;
+using Org.BouncyCastle.Extension;
 using Org.BouncyCastle.Utilities;
 
 namespace Org.BouncyCastle.Security
@@ -282,7 +283,15 @@ namespace Org.BouncyCastle.Security
             string aliased = (string) algorithms[mechanism];
 
             if (aliased != null)
+            {
                 mechanism = aliased;
+            }
+            else
+            {
+                var factory = ExtensionManager.FindDigestSignerFactory(mechanism);
+                if (factory != null)
+                    return factory.Oid;
+            }
 
             return (DerObjectIdentifier) oids[mechanism];
         }
@@ -559,6 +568,10 @@ namespace Org.BouncyCastle.Security
                     }
                 }
             }
+
+            var factory = ExtensionManager.FindDigestSignerFactory(algorithm);
+            if (factory != null)
+                return factory.CreateSigner(algorithm);
 
             throw new SecurityUtilityException("Signer " + algorithm + " not recognised.");
         }
