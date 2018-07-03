@@ -11,7 +11,7 @@ using System.Collections;
 
 namespace Org.BouncyCastle.Utilities
 {
-    internal abstract class Platform
+    public abstract class Platform
     {
         private static readonly CompareInfo InvariantCompareInfo = CultureInfo.InvariantCulture.CompareInfo;
 
@@ -112,15 +112,15 @@ namespace Org.BouncyCastle.Utilities
             }
             return result;
         }
-        internal static System.Collections.IDictionary CreateHashtable()
+        public static System.Collections.IDictionary CreateHashtable()
         {
             return new Dictionary<object, object>();
         }
-        internal static System.Collections.IDictionary CreateHashtable(int capacity)
+        public static System.Collections.IDictionary CreateHashtable(int capacity)
         {
             return new Dictionary<object, object>(capacity);
         }
-        internal static System.Collections.IDictionary CreateHashtable(System.Collections.IDictionary dictionary)
+        public static System.Collections.IDictionary CreateHashtable(System.Collections.IDictionary dictionary)
         {
             System.Collections.IDictionary result = new Dictionary<object, object>(dictionary.Count);
             foreach (System.Collections.DictionaryEntry entry in dictionary)
@@ -151,15 +151,15 @@ namespace Org.BouncyCastle.Utilities
             }
             return result;
         }
-        internal static System.Collections.IDictionary CreateHashtable()
+        public static System.Collections.IDictionary CreateHashtable()
         {
             return new Hashtable();
         }
-        internal static System.Collections.IDictionary CreateHashtable(int capacity)
+        public static System.Collections.IDictionary CreateHashtable(int capacity)
         {
             return new Hashtable(capacity);
         }
-        internal static System.Collections.IDictionary CreateHashtable(System.Collections.IDictionary dictionary)
+        public static System.Collections.IDictionary CreateHashtable(System.Collections.IDictionary dictionary)
         {
             return new Hashtable(dictionary);
         }
